@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Entity
 @Table(name="_user")
-@EntityListeners((AuditingEntityListener.class))
+@EntityListeners(AuditingEntityListener.class)
 public class User implements UserDetails, Principal {
 
     @Id
@@ -95,7 +95,7 @@ public class User implements UserDetails, Principal {
         return enabled;
     }
 
-    public String fullName(){
+            public String fullName(){
         return firstName+" "+ lastName;
     }
 }
