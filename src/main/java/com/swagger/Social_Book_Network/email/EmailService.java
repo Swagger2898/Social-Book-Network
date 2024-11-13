@@ -60,6 +60,7 @@ public void sendEmail(
         String template = templateEngine.process(templateName , context);
         helper.setText(template,true);
 
+    mailSender.send(mimeMessage);
     }
 
 
