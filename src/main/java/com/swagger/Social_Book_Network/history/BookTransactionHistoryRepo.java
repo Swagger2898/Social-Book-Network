@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BookTransactionHistoryRepo extends JpaRepository<BookTransactionHistory, Integer > {
@@ -16,7 +17,23 @@ public interface BookTransactionHistoryRepo extends JpaRepository<BookTransactio
     @Query("""
             select history from BookTransactionHistory history where history.user.id = :userId
             """
-
     )
     Page<BookTransactionHistory> findAllBorrowedBooks(Pageable pageable, Integer userId);
+
+    @Query("""
+            select history from BookTransactionHistory history where history.book.owner.id = :userId
+            """)
+    Page<BookTransactionHistory> findAllReturnedBooks(Pageable pageable, Integer UserId);
+
+    @Query("""
+            (count(*) >0) as isBorrowed from BookTransactionHistory history where history.user.id = :userId 
+                and history.book.id = :bookId and history.returnApproved = false
+                """)
+    boolean isAlreadyBorrowedbyUser(Integer bookId, Integer UserId);
+
+    @Query("""
+            select transaction from BookTransactionHistory transaction where transaction.user.id =:userId and transaction.book.id = :bookId
+            and transaction.returned = false and transaction.returnApproved = false
+                """)
+    Optional<BookTransactionHistory> findByBookIdAndUserId(Integer bookId, Integer id);
 }
