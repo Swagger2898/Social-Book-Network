@@ -37,13 +37,12 @@ private final UserRepository userRepository;
 
 }
 
-
-    @GetMapping("/activate_account")
+@GetMapping("/activate_account")
     public void confirm(@RequestParam String token) throws MessagingException {
         service.activateAccount(token);
 
 
-    }
+}
 
 @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
@@ -51,6 +50,7 @@ private final UserRepository userRepository;
 ){
     return ResponseEntity.ok(service.authenticate(request));
 }
+
 
 
 
