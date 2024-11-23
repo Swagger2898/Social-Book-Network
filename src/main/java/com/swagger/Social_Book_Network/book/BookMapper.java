@@ -1,7 +1,10 @@
 package com.swagger.Social_Book_Network.book;
 
 import com.swagger.Social_Book_Network.history.BookTransactionHistory;
+import com.swagger.Social_Book_Network.file.FileUtils;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 @Service
 public class BookMapper {
@@ -17,7 +20,7 @@ public Book toBook(BookRequest request){
             .build();
 }
 
-    public BookResponse toBookResponse(Book book) {
+    public BookResponse toBookResponse(Book book) throws IOException {
     return BookResponse.builder()
             .id(book.getId())
             .title(book.getTitle())
@@ -28,7 +31,7 @@ public Book toBook(BookRequest request){
             .archived(book.isArchived())
             .shareable(book.isShareable())
             .owner(book.getOwner().fullName())
-            //.cover()
+            .cover(FileUtils.readFileFromLocation(book.getBookCover()))
             .build();
     }
 
