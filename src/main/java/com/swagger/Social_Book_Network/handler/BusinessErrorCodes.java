@@ -4,6 +4,8 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 
+
+@Getter
 public enum BusinessErrorCodes {
 
     NO_CODE(0,HttpStatus.NOT_IMPLEMENTED,"No code"),
@@ -18,12 +20,10 @@ public enum BusinessErrorCodes {
     ACCOUNT_DISABLED(303, HttpStatus.FORBIDDEN, "LOGIN AND / OR PASSWORD IS INCORRECT"),
 
     BAD_CREDENTIALS(304,HttpStatus.FORBIDDEN,"User account is Locked");
-
-@Getter
 private final int code;
-@Getter
+
 private final String description;
-@Getter
+
 private final HttpStatus httpStatus;
 
 BusinessErrorCodes(int code , HttpStatus httpStatus,String description){
