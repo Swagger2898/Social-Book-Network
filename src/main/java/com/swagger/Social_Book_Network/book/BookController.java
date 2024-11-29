@@ -20,7 +20,7 @@ public class BookController {
 
     @PostMapping("")
     public ResponseEntity<Integer> saveBook(
-            @Valid @RequestBody BookRequest request,
+            @Valid @RequestBody BookRequest request, //request body is deserialized into a BookRequest object
             Authentication connectedUser
     ) {
         return ResponseEntity.ok(service.save(request, connectedUser));

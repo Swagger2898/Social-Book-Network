@@ -1,9 +1,11 @@
 package com.swagger.Social_Book_Network.feedback;
 
 import com.swagger.Social_Book_Network.book.Book;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+@Service
 public class FeedBackMapper {
     public FeedBack toFeedBack(FeedBackRequest request) {
 

@@ -19,8 +19,9 @@ import static java.util.Arrays.stream;
 
 @Service
 public class JwtService {
-    @Value("${application.security.jwt.expiration}")
-    private String secretKey;
+    @Value("${application.security.jwt.secret-key}")
+    private String secretKey; // 32 characters (256 bits)
+
 
     @Value("${application.security.jwt.expiration}")
     private long jwtExpiration;

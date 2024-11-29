@@ -108,7 +108,7 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken).build();
     }
-     @Transactional
+
     public void activateAccount(String token) throws MessagingException {
 
 
