@@ -28,7 +28,7 @@ public class FeedBackService {
                 .orElseThrow(() -> new EntityNotFoundException("No Book found with ID :: " + request.bookId()));
 
         if (book.isArchived() || !book.isShareable()) {
-            throw new OperationNotPermittedException("You cannot give feedback for and archoved or not shareable book");
+            throw new OperationNotPermittedException("You cannot give feedback for archived or non shareable book");
         }
         User user = ((User) connectedUser.getPrincipal());
         if (Objects.equals(book.getOwner().getId(), user.getId())) {
@@ -49,7 +49,8 @@ public class FeedBackService {
                 .toList();
 
         return new PageResponse<>(
-                feedBackResponses,feedBacks.getNumber(),
+                feedBackResponses,
+                feedBacks.getNumber(),
                 feedBacks.getSize(),
                 feedBacks.getTotalElements(),
                 feedBacks.getTotalPages(),
