@@ -1,8 +1,18 @@
-import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';  // Import the HomeComponent
-import { AboutComponent } from './about/about.component';  // Import the AboutComponent
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';  
+import { LoginComponent } from './pages/login/login.component';
 
-export const routes: Routes = [
-  { path: '', component: HomeComponent },  // Default route: load HomeComponent
-  { path: 'about', component: AboutComponent }  // Route to AboutComponent
-];
+export const routes:  Routes =[
+{
+    path: 'login' ,
+    component: LoginComponent
+} ];
+
+
+@NgModule(
+{
+imports:[RouterModule.forRoot(routes)],
+exports:[RouterModule]
+} )
+
+export class AppRoutingModule{}
