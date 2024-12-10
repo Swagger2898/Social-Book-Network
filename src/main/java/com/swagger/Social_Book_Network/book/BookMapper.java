@@ -20,7 +20,7 @@ public Book toBook(BookRequest request){
             .build();
 }
 
-    public BookResponse toBookResponse(Book book) throws IOException {
+    public BookResponse toBookResponse(Book book) {
     return BookResponse.builder()
             .id(book.getId())
             .title(book.getTitle())

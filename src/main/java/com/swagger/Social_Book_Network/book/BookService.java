@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -31,6 +32,7 @@ public class BookService {
     private final BookTransactionHistoryRepo transactionHistoryRepo;
     private final FileStorageService fileStorageService;
 
+
     public Integer save(BookRequest request, Authentication connectedUser) {
 
         User user = ((User) connectedUser.getPrincipal());
@@ -38,10 +40,12 @@ public class BookService {
         book.setOwner(user);
         return bookRepository.save(book).getId();
 
+
+
     }
 
 
-    @SneakyThrows
+
     public BookResponse findById(Integer bookId) {
 
         return bookRepository.findById(bookId)
@@ -49,7 +53,7 @@ public class BookService {
                 .orElseThrow(() -> new EntityNotFoundException("No book found with id ::" + bookId));
     }
 
-    @SneakyThrows
+
     public PageResponse<BookResponse> findAllBooks(int page, int size, Authentication connectedUser) {
         User user = ((User) connectedUser.getPrincipal());
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
@@ -70,7 +74,7 @@ public class BookService {
 
     }
 
-    @SneakyThrows
+
     public PageResponse<BookResponse> findAllBooksByOwner(int page, int size, Authentication connectedUser) {
         User user = ((User) connectedUser.getPrincipal());
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());

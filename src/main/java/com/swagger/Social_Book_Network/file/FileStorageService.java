@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 @Slf4j
 public class FileStorageService {
 
-    @Value("{application.file.upload.photos-output-path}")
+    @Value("${application.file.upload.photos-output-path}")
     private String fileUploadPath;;
     public String saveFile(@NotNull MultipartFile sourceFile,
                            @NotNull Integer userId) {
