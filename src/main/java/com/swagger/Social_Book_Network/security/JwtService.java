@@ -6,11 +6,14 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.function.Function;
@@ -19,12 +22,15 @@ import static java.util.Arrays.stream;
 
 @Service
 public class JwtService {
-    @Value("${application.security.jwt.secret-key}")
-    private String secretKey; // 32 characters (256 bits)
+
+
+    @Value(value = "${application.security.jwt.secret-key}")
+    private String secretKey = "1qouwehfaoiuwfauokif1234567890abcd"; // 32 characters (256 bits)
+
 
 
     @Value("${application.security.jwt.expiration}")
-    private long jwtExpiration;
+    private long jwtExpiration = 8640000;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -92,13 +98,34 @@ public class JwtService {
     }
 
     private Key getSignInKey() {
+        // Ensure the key is exactly 32 bytes (256 bits)
+        byte[] keyBytes = secretKey.substring(0, 32).getBytes(StandardCharsets.UTF_8); // Trim to 32 characters
 
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+
+
+        // Ensure the key is 256 bits (32 bytes)
+        if (keyBytes.length != 32) {
+            throw new IllegalArgumentException("The key must be 256 bits (32 bytes).");
+        }
+
         return Keys.hmacShaKeyFor(keyBytes);
+    }
     }
 
 
 
 
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book,Integer> , JpaSpecificationExecutor<Book> {
-
     @Query("""
-            Select book from Book book
-            where book.archived= false
-            and book.shareable=true
-            and book.owner.id != :userId
-            """)
+    Select book from Book book
+    where book.archived = false
+    and book.shareable = true
+    and book.owner.id != :userId
+
+""")
     Page<Book> findAllDisplayableBooks(Pageable pageable, Integer userId);
 
 
