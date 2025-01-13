@@ -33,6 +33,6 @@ export class MenuComponent implements OnInit {
 
   logout() {
     // Your logout logic here
-    throw new Error('Method not implemented.');
-  }
+localStorage.removeItem('token'); 
+window.location.reload(); }
 }

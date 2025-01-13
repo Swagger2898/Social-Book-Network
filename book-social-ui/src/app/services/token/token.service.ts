@@ -1,11 +1,29 @@
 import { Injectable, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
+  isTokenNotValid() {
+return !this.isTokenValid();  
+}
+  isTokenValid() {
+const token = this.token;  
+
+if(!token){
+  return false;
+}
+const jwtHelper = new JwtHelperService();
+const isTokenExpired=jwtHelper.isTokenExpired(token);
+if(isTokenExpired){
+  localStorage.clear();
+  return false;
+}
+return true;
+}
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
