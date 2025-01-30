@@ -80,7 +80,7 @@ public class User implements UserDetails, Principal {
 
     @Override
     public String getUsername() {
-        return "";
+        return email;
     }
 
     @Override

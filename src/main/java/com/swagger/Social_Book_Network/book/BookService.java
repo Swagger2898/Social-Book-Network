@@ -217,8 +217,8 @@ public class BookService {
             throw new OperationNotPermittedException("The requested book cannot be borrowed since it is archived or not shareable");
         }
         User user = ((User) connectedUser.getPrincipal());
-        if (Objects.equals(book.getOwner().getId(), user.getId())) {
-            throw new OperationNotPermittedException("You cannot borrow or return your own book");
+        if (!Objects.equals(book.getOwner().getId(), user.getId())) {
+            throw new OperationNotPermittedException("You cannot return a book you don't own");
         }
         BookTransactionHistory bookTransactionHistory = transactionHistoryRepo.findByBookIdAndOwnerId(bookId, user.getId())
                 .orElseThrow(() -> new OperationNotPermittedException(("The book is not returned yet.You cannot approve its response")));
@@ -236,3 +236,18 @@ public class BookService {
         bookRepository.save(book);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
