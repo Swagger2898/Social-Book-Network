@@ -29,4 +29,6 @@ import { BorrowedBookListComponent } from './pages/borrowed-book-list/borrowed-b
     FormsModule
   ]
 })
-export class BookModule { }
+export class BookModule { 
+  
+}
