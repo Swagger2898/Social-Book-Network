@@ -13,7 +13,7 @@ export class MyBooksComponent  implements OnInit{
 
   bookResponse: PageResponseBookResponse = {};
   page = 0;
-  size = 1;
+  size = 5;
     constructor(
       private bookService: BookService,
       private router: Router
@@ -60,6 +60,7 @@ export class MyBooksComponent  implements OnInit{
     }
     goToNextPage() {
     this.page++;
+    this.findAllBooks();
     }
     
   

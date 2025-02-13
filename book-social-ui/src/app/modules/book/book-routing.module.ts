@@ -31,11 +31,15 @@ const routes: Routes = [
       component:BorrowedBookListComponent
     },
     {
-      path:'manage',
+      path: 'manage/:id',
       canActivate: [authGuard],
-      component:ManageBookComponent
-  
-      },
+      component: ManageBookComponent
+    },
+    {
+      path: 'manage',
+      canActivate: [authGuard],
+      component: ManageBookComponent
+    },
       {
         path: 'my-returned-books',
         canActivate: [authGuard],

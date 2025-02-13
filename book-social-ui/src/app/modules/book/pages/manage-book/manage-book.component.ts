@@ -51,7 +51,7 @@ constructor(
 
 onFileSelected(event: any) {
 this.selectedBookCover = event.target.files[0];
-console.timeLog(this.selectedBookCover);
+console.log(this.selectedBookCover);
 if(this.selectedBookCover){
   const reader = new FileReader();
   reader.onload = () => {
@@ -73,11 +73,12 @@ this.bookService.saveBook({
     }
   }).subscribe({
       next:()=>{
-        this.router.navigate(['/book/my-books']);
+        this.router.navigate(['/books/my-books']);
   }
 })
  },
  error:(err)=>{
+  console.log(err);
   this.errorMsg = err.error.validationErrors ;
  }
 });

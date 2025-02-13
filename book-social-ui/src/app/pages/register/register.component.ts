@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
 
-  registerRequest: RegistrationRequest = {email: '', firstName: '', lastName: '', password: ''};  
+  registerRequest: RegistrationRequest = {email: 's', firstName: '', lastName: '', password: ''};  
   errorMsg: Array<string> = [];
 
 constructor(
