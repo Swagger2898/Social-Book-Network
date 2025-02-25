@@ -35,6 +35,15 @@ public Book toBook(BookRequest request){
             .build();
     }
 
+    public void updateBookFromRequest(Book book, BookRequest request) {
+        book.setTitle(request.title());
+        book.setAuthorName(request.authorName());
+        book.setIsbn(request.isbn());
+        book.setSynopsis(request.synopsis());
+        book.setArchived(request.archived());
+        book.setShareable(request.shareable());
+    }
+
     public BorrowedBookResponse toBorrowedBookResponse(BookTransactionHistory history) {
 
        return  BorrowedBookResponse.builder()

@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
@@ -20,9 +21,42 @@ public class SocialBookNetworkApplication {
 		SpringApplication.run(SocialBookNetworkApplication.class, args);
 //	    String rs="the fox is        an animal    ";
 //		String s = reverseTheString(rs);
-//        System.out.println(s);
+//		List<List<Integer>> rooms = Arrays.asList(
+//				Arrays.asList(1,3),
+//				Arrays.asList(1,4),
+//				Arrays.asList(2,3,4,1),
+//				Arrays.asList(),
+//						Arrays.asList(4,3,2)
+//		);
+//		System.out.println(canVisitAllRooms(rooms));
+
 	}
 
+
+
+		public static boolean canVisitAllRooms(List<List<Integer>> rooms) {
+
+			int n = rooms.size();
+			int[] visited = new int[n];
+			for(int i=0;i<n;i++){
+				int j=0;
+				while(j<rooms.get(i).size()){
+         if(rooms.get(i).get(j)!=i) {
+			 visited[rooms.get(i).get(j)] = 1;
+			 j++;
+		 }
+		 else{
+			 j++;
+		 }
+				}
+			}
+			for(int i=0;i<n;i++){
+				if(visited[i]==0){
+					return false;
+				}
+			}
+			return true;
+		}
 
 //	public static String reverseTheString(String s){
 //        StringBuilder sb = new StringBuilder();

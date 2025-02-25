@@ -13,11 +13,13 @@
             class="form-control"
             type="file"
             id="formFile"id="title" 
-            accept="image"
+            accept="image/*"
             >
           </div>
         <div class=" col-9">
             <form class="row g-3">
+                <input [(ngModel)]="bookRequest.id" name="id" type="hidden">
+
                 <div class ="col-12">
                     <label for="title" class="form-label">Title</label>
                     <input [(ngModel)]="bookRequest.title" name="title" type="text" class="form-control" id="title" placeholder="Book-Title">

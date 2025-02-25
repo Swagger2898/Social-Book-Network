@@ -34,14 +34,22 @@ public class BookService {
 
 
     public Integer save(BookRequest request, Authentication connectedUser) {
+        User user = (User) connectedUser.getPrincipal();
+        Book book;
 
-        User user = ((User) connectedUser.getPrincipal());
-        Book book = bookMapper.toBook(request);
+        if (request.id() != null) { // Use record accessor method
+            book = bookRepository.findById(request.id())
+                    .map(existingBook -> {
+                        bookMapper.updateBookFromRequest(existingBook, request);
+                        return existingBook;
+                    })
+                    .orElseThrow(() -> new EntityNotFoundException("Book not found with id: " + request.id()));
+        } else {
+            book = bookMapper.toBook(request);
+        }
+
         book.setOwner(user);
         return bookRepository.save(book).getId();
-
-
-
     }
 
 

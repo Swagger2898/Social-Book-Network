@@ -26,7 +26,7 @@ export class BookListComponent implements OnInit {
   }
 
   // Fetch books for the current page
-  private findAllBooks() { debugger;
+  private findAllBooks() { 
     this.bookService.findAllBooks({
       page: this.page,
       size: this.size
